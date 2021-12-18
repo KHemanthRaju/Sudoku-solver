@@ -24,7 +24,6 @@ const joinValues = () => {
 }
 
 const solve = () => {
-    var axios = require("axios").default;
 
     var options = {
         method: 'POST',
@@ -46,4 +45,4 @@ const solve = () => {
     });
 }
 
-solveButton.addEventListener('click', joinValues);
+solveButton.addEventListener('click', solve);
