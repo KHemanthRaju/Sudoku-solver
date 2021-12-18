@@ -3,20 +3,20 @@ const solveButton = document.querySelector("#solve-button");
 const squares = 81;
 const submission = [];
 
-for(let i=0;i<squares;i++){
+for (let i = 0; i < squares; i++) {
     const inputElement = document.createElement('input');
-    inputElement.setAttribute('type','number');
-    inputElement.setAttribute('min',1);
-    inputElement.setAttribute('max',9);
+    inputElement.setAttribute('type', 'number');
+    inputElement.setAttribute('min', 1);
+    inputElement.setAttribute('max', 9);
     puzzleBoard.appendChild(inputElement);
 }
 
 const joinValues = () => {
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
-        if(input.value){
+        if (input.value) {
             submission.push(input.value);
-        }else{
+        } else {
             submission.push('.');
         }
     })
@@ -24,7 +24,26 @@ const joinValues = () => {
 }
 
 const solve = () => {
-    
+    var axios = require("axios").default;
+
+    var options = {
+        method: 'POST',
+        url: 'https://solve-sudoku.p.rapidapi.com/',
+        headers: {
+            'content-type': 'application/json',
+            'x-rapidapi-host': 'solve-sudoku.p.rapidapi.com',
+            'x-rapidapi-key': '6b557508f9mshbec55b4656aa096p12b819jsnb3084538f060'
+        },
+        data: {
+            puzzle: '2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3'
+        }
+    };
+
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+    }).catch(function (error) {
+        console.error(error);
+    });
 }
 
-solveButton.addEventListener('click',joinValues);
+solveButton.addEventListener('click', joinValues);
