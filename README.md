@@ -2,4 +2,4 @@
  
 Cool
 
-Using JS
+Using JS with vanillajs
