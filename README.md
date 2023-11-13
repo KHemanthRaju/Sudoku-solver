@@ -15,7 +15,136 @@ The interview questions can be asked from anything that has been covered in the 
  Here are some sample questions. Similar kind of questions will be asked in the interview.
 
 1. Given a basic React app. Implement the sort by price and filter with fast delivery using **useReducer**. Link- https://codesandbox.io/s/usereducer-infinity-wars-iwvvo?file=/src/App.js
-2. 2. Create a React app with **UserContext** that stores the user's information (name, Pincode and address). Create a **UserData** component that displays the user's name, pincode and address obtained from the **UserContext** using **useContext**. On change of the user name from a dropdown show the relevant name, address and Pincode.
+
+```javascript
+import React, { useReducer } from "react";
+import "./styles.css";
+
+// ... (data remains the same)
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SORT_BY_PRICE":
+      if (action.payload === "ASC") {
+        return {
+          ...state,
+          products: state.products.slice().sort((a, b) => a.price - b.price)
+        };
+      } else if (action.payload === "DESC") {
+        return {
+          ...state,
+          products: state.products.slice().sort((a, b) => b.price - a.price)
+        };
+      }
+      return state;
+    case "FILTER_FAST_DELIVERY":
+      return {
+        ...state,
+        products: state.products.filter(product => product.fastDelivery)
+      };
+    default:
+      return state;
+  }
+};
+
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, { products: data });
+
+  return (
+    <>
+      <div className="App" style={{ display: "flex", flexWrap: "wrap" }}>
+        {state.products.map(
+          ({
+            id,
+            name,
+            image,
+            price,
+            productName,
+            inStock,
+            level,
+            fastDelivery
+          }) => (
+            // ... (existing JSX remains the same)
+          )
+        )}
+      </div>
+      <div style={{ marginTop: "20px" }}>
+        <button
+          onClick={() => dispatch({ type: "SORT_BY_PRICE", payload: "ASC" })}
+        >
+          Sort by Price (Low to High)
+        </button>
+        <button
+          onClick={() => dispatch({ type: "SORT_BY_PRICE", payload: "DESC" })}
+        >
+          Sort by Price (High to Low)
+        </button>
+        <button onClick={() => dispatch({ type: "FILTER_FAST_DELIVERY" })}>
+          Filter by Fast Delivery
+        </button>
+      </div>
+    </>
+  );
+}
+
+```
+2. Create a React app with **UserContext** that stores the user's information (name, Pincode and address). Create a **UserData** component that displays the user's name, pincode and address obtained from the **UserContext** using **useContext**. On change of the user name from a dropdown show the relevant name, address and Pincode.
+
+```javascript
+import React, { useState, useContext, createContext } from "react";
+import "./styles.css";
+
+// UserContext to store user information
+const UserContext = createContext();
+
+const userData = {
+  Alice: {
+    name: "Alice",
+    pincode: "12345",
+    address: "123 Main St, Wonderland"
+  },
+  Bob: {
+    name: "Bob",
+    pincode: "54321",
+    address: "456 Elm St, Bobland"
+  }
+};
+
+const UserData = () => {
+  const user = useContext(UserContext);
+  return (
+    <div>
+      <h2>User Information</h2>
+      <p>Name: {user.name}</p>
+      <p>Pincode: {user.pincode}</p>
+      <p>Address: {user.address}</p>
+    </div>
+  );
+};
+
+const App = () => {
+  const [selectedUser, setSelectedUser] = useState("Alice");
+
+  const handleUserChange = (e) => {
+    setSelectedUser(e.target.value);
+  };
+
+  return (
+    <div className="App">
+      <h1>User Data using Context</h1>
+      <select value={selectedUser} onChange={handleUserChange}>
+        <option value="Alice">Alice</option>
+        <option value="Bob">Bob</option>
+      </select>
+      <UserContext.Provider value={userData[selectedUser]}>
+        <UserData />
+      </UserContext.Provider>
+    </div>
+  );
+};
+
+export default App;
+```
 
 ### E-commerce Application
 
