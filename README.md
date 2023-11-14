@@ -565,6 +565,46 @@ These hooks provide a powerful and concise way to manage state, side effects, an
 </div>
 
 7. What is reconciliation in React JS?
+
+<div>Reconciliation is the process by which React updates the Virtual DOM and determines what changes need to be applied to the actual DOM to keep it in sync with the Virtual DOM. It is a key part of React's efficient updating mechanism, ensuring that the UI remains consistent with the application's state.
+
+Here's how the reconciliation process typically works:
+
+**Render Phase:**
+
+<p>When a component's state or props change, React triggers a re-render of the component.
+During this phase, React generates a new Virtual DOM tree representing the updated UI based on the changed state or props.</p>
+**Reconciliation Phase:**
+
+<p>React compares the new Virtual DOM tree with the previous one generated for the same component.
+It performs a tree-diffing algorithm to identify the differences between the two trees.
+React identifies which parts of the Virtual DOM have changed, been added, or been removed.</p>
+
+**Update Phase:**
+
+<p>React computes the most efficient way to update the actual DOM based on the differences found in the reconciliation phase.
+Instead of re-rendering the entire UI, React aims to update only the specific parts that have changed.
+React generates a minimal set of DOM manipulation instructions to update the real DOM.</p>
+**Reconciliation Strategies:**
+
+<p>React employs various strategies to optimize reconciliation, such as key-based reconciliation for lists.
+The key attribute in React elements helps React identify which items have changed, been added, or been removed in a list.</p>
+```jsx
+
+// Example of key-based reconciliation
+function MyList({ items }) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.id}>{item.text}</li>
+      ))}
+    </ul>
+  );
+}
+```
+By using keys, React can efficiently update the list without re-rendering all items.
+
+Reconciliation is a fundamental part of React's declarative approach to building UIs. It ensures that the application's state changes are reflected accurately in the user interface while optimizing performance by minimizing unnecessary updates to the DOM.</div>
 8. Write custom hooks.
 9. What are some performance optimizing techniques in React JS or web.
 10. Explain how the internet works.
