@@ -357,9 +357,10 @@ In this example:
 1. Promise.then()
 2. Promise.catch()
 3. Promise.finally()
+
 Let's explore each method with examples:
 
-1. **Promise.then()**
+1. **Promise.then() :**
 The then method is used to handle the fulfillment of a promise (when it's resolved).
 
 ```javascript
@@ -382,7 +383,7 @@ myPromise.then((result) => {
 });
 ```
 
-2. **Promise.catch()**
+2. **Promise.catch() :**
 The catch method is used to handle the rejection of a promise (when it's rejected).
 
 ```javascript
@@ -406,7 +407,7 @@ myPromise.then((result) => {
 });
 ```
 
-3. **Promise.finally()**
+3. **Promise.finally() :**
 The finally method is used to specify a function that will be executed when the promise is either fulfilled or rejected.
 
 ```javascript
