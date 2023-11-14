@@ -589,8 +589,8 @@ React generates a minimal set of DOM manipulation instructions to update the rea
 
 <p>React employs various strategies to optimize reconciliation, such as key-based reconciliation for lists.
 The key attribute in React elements helps React identify which items have changed, been added, or been removed in a list.</p>
-```jsx
 
+```jsx
 // Example of key-based reconciliation
 function MyList({ items }) {
   return (
@@ -602,9 +602,11 @@ function MyList({ items }) {
   );
 }
 ```
+
 By using keys, React can efficiently update the list without re-rendering all items.
 
 Reconciliation is a fundamental part of React's declarative approach to building UIs. It ensures that the application's state changes are reflected accurately in the user interface while optimizing performance by minimizing unnecessary updates to the DOM.</div>
+
 8. Write custom hooks.
 9. What are some performance optimizing techniques in React JS or web.
 10. Explain how the internet works.
