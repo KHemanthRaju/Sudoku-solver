@@ -316,11 +316,14 @@ https://file.notion.so/f/f/8fefe6db-2092-435e-905d-5350a0474ea6/c65f1743-2090-40
 ### Concept Questions:
 
 1. Explain event loops in javaScript.
+	The event loop is a mechanism used by JavaScript to manage asynchronous tasks. It continuously checks the task queue to see if there are any tasks waiting to be executed. If there are, it adds the tasks to the call stack.
+<img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KlrNrmUn1p54g4UlFlvREQ.png" width="50%" height="50%"/>
+
 2. Explain what is closures with the help of code.
 3. What are the different promise methods? Explain with the help of code.
 4. What are some lifecycle methods in React JS?
-5. Explain the working of different hooks in React JS.
-6. What is reconciliation in React JS?
-7. Write custom hooks.
-8. What are some performance optimizing techniques in React JS or web.
-9. Explain how the internet works.
+6. Explain the working of different hooks in React JS.
+7. What is reconciliation in React JS?
+8. Write custom hooks.
+9. What are some performance optimizing techniques in React JS or web.
+10. Explain how the internet works.
