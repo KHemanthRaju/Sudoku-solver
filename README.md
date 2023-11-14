@@ -316,14 +316,44 @@ https://file.notion.so/f/f/8fefe6db-2092-435e-905d-5350a0474ea6/c65f1743-2090-40
 ### Concept Questions:
 
 1. Explain event loops in javaScript.
-	The event loop is a mechanism used by JavaScript to manage asynchronous tasks. It continuously checks the task queue to see if there are any tasks waiting to be executed. If there are, it adds the tasks to the call stack.
+<p>The event loop is a mechanism used by JavaScript to manage asynchronous tasks. It continuously checks the task queue to see if there are any tasks waiting to be executed. If there are, it adds the tasks to the call stack.</p>
 <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*KlrNrmUn1p54g4UlFlvREQ.png" width="50%" height="50%"/>
 
 2. Explain what is closures with the help of code.
+<p>A closure is a JavaScript feature that allows inner functions to access the outer scope of a function. Closures help in binding a function to its outer boundary and is created automatically whenever a function is created.</p>
+<p>Example</p>
+
+```javascript
+function outerFunction() {
+  const outerVar = "I'm from the outer function";
+
+  function innerFunction() {
+    console.log(outerVar); // Accessing outerVar from the outer function
+  }
+
+  // Return the inner function
+  return innerFunction;
+}
+
+const myClosure = outerFunction(); // myClosure now holds the innerFunction
+
+// Execute the inner function (which still has access to outerVar)
+myClosure(); // Outputs: "I'm from the outer function"
+```
+
+<div>
+In this example:
+
+* outerFunction contains a variable outerVar and an inner function innerFunction.
+* innerFunction is returned from outerFunction and assigned to myClosure.
+* Even though outerFunction has finished executing, myClosure retains access to outerVar due to the closure. When myClosure is executed, it can still access and use outerVar.
+* Closures are powerful as they enable functions to have persistent access to the variables from their containing scope, providing a way to create private variables and maintain state across function calls. This is often used in scenarios like creating private data or implementing higher-order functions in JavaScript.
+</div>
+
 3. What are the different promise methods? Explain with the help of code.
 4. What are some lifecycle methods in React JS?
-6. Explain the working of different hooks in React JS.
-7. What is reconciliation in React JS?
-8. Write custom hooks.
-9. What are some performance optimizing techniques in React JS or web.
-10. Explain how the internet works.
+5. Explain the working of different hooks in React JS.
+6. What is reconciliation in React JS?
+7. Write custom hooks.
+8. What are some performance optimizing techniques in React JS or web.
+9. Explain how the internet works.
