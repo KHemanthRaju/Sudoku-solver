@@ -444,6 +444,126 @@ These methods provide a way to handle the various states of a promise: fulfilled
 </ol>
 
 6. Explain the working of different hooks in React JS.
+<div>
+Here are some commonly used React Hooks:
+
+**1. useState Hook:**
+Used to add state to functional components.
+Returns an array with the current state value and a function to update it.
+```jsx
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+**2. useEffect Hook:**
+Adds side effects to functional components.
+Invoked after rendering and can perform actions like data fetching, subscriptions, etc.
+```jsx
+import React, { useState, useEffect } from "react";
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Data fetching logic
+    fetch("https://api.example.com/data")
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.error(error));
+
+    // Cleanup function (optional)
+    return () => {
+      // Cleanup logic (e.g., canceling subscriptions)
+    };
+  }, []); // Dependency array (empty means it runs once on mount)
+
+  return <div>{data ? <p>Data: {data}</p> : <p>Loading...</p>}</div>;
+}
+```
+**3. useContext Hook:**
+Allows functional components to subscribe to React context without introducing a consumer component.
+```jsx
+import React, { useContext } from "react";
+import MyContext from "./MyContext";
+
+function MyComponent() {
+  const contextValue = useContext(MyContext);
+
+  return <p>Context Value: {contextValue}</p>;
+}
+```
+**4. useReducer Hook:**
+Manages complex state logic by dispatching actions.
+Useful for state transitions that depend on the previous state.
+```jsx
+
+import React, { useReducer } from "react";
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: "increment" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
+    </div>
+  );
+}
+```
+**5. useCallback and useMemo Hooks:**
+**useCallback:** Memoizes functions to prevent unnecessary re-renders.
+**useMemo:** Memoizes the result of a computation to avoid recomputing it on every render.
+```jsx
+
+import React, { useState, useCallback, useMemo } from "react";
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  const doubledCount = useMemo(() => {
+    console.log("Computing doubledCount");
+    return count * 2;
+  }, [count]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Doubled Count: {doubledCount}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+```
+These hooks provide a powerful and concise way to manage state, side effects, and other aspects of functional components. They enable developers to write more readable and maintainable code in functional components while still leveraging the features traditionally associated with class components.
+</div>
+
 7. What is reconciliation in React JS?
 8. Write custom hooks.
 9. What are some performance optimizing techniques in React JS or web.
