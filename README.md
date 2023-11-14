@@ -437,8 +437,12 @@ myPromise
 These methods provide a way to handle the various states of a promise: fulfilled (then), rejected (catch), and the final cleanup or additional logic (finally). Using these methods helps in writing more organized and readable asynchronous code.</div>
 
 4. What are some lifecycle methods in React JS?
-5. Explain the working of different hooks in React JS.
-6. What is reconciliation in React JS?
-7. Write custom hooks.
-8. What are some performance optimizing techniques in React JS or web.
-9. Explain how the internet works.
+	i. Mounting - ComponentDidMount
+	ii. Updating - ComponentDidUpdate
+	iii. Unmounting - ComponentUnMounting
+
+6. Explain the working of different hooks in React JS.
+7. What is reconciliation in React JS?
+8. Write custom hooks.
+9. What are some performance optimizing techniques in React JS or web.
+10. Explain how the internet works.
