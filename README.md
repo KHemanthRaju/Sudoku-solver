@@ -436,10 +436,12 @@ myPromise
 ```
 These methods provide a way to handle the various states of a promise: fulfilled (then), rejected (catch), and the final cleanup or additional logic (finally). Using these methods helps in writing more organized and readable asynchronous code.</div>
 
-4. What are some lifecycle methods in React JS?
-	i. Mounting - ComponentDidMount
-	ii. Updating - ComponentDidUpdate
-	iii. Unmounting - ComponentUnMounting
+5. What are some lifecycle methods in React JS?
+<ol>
+	<li>Mounting - ComponentDidMount</li>
+	<li>Updating - ComponentDidUpdate</li>
+	<li>Unmounting - ComponentUnMounting</li>
+</ol>
 
 6. Explain the working of different hooks in React JS.
 7. What is reconciliation in React JS?
