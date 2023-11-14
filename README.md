@@ -585,6 +585,7 @@ React identifies which parts of the Virtual DOM have changed, been added, or bee
 <p>React computes the most efficient way to update the actual DOM based on the differences found in the reconciliation phase.
 Instead of re-rendering the entire UI, React aims to update only the specific parts that have changed.
 React generates a minimal set of DOM manipulation instructions to update the real DOM.</p>
+
 **Reconciliation Strategies:**
 
 <p>React employs various strategies to optimize reconciliation, such as key-based reconciliation for lists.
