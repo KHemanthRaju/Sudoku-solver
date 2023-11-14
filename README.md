@@ -351,6 +351,90 @@ In this example:
 </div>
 
 3. What are the different promise methods? Explain with the help of code.
+
+<div>Promises in JavaScript have several methods to handle asynchronous operations. The main methods are:
+
+1. Promise.then()
+2. Promise.catch()
+3. Promise.finally()
+Let's explore each method with examples:
+
+1. **Promise.then()**
+The then method is used to handle the fulfillment of a promise (when it's resolved).
+
+```javascript
+const myPromise = new Promise((resolve, reject) => {
+  // Simulating an asynchronous operation
+  setTimeout(() => {
+    const success = true;
+    if (success) {
+      resolve("Operation completed successfully!");
+    } else {
+      reject("Operation failed!");
+    }
+  }, 1000);
+});
+
+myPromise.then((result) => {
+  console.log(result); // Outputs: Operation completed successfully!
+}).catch((error) => {
+  console.error(error); // This block won't be executed in this example
+});
+```
+
+2. **Promise.catch()**
+The catch method is used to handle the rejection of a promise (when it's rejected).
+
+```javascript
+
+const myPromise = new Promise((resolve, reject) => {
+  // Simulating an asynchronous operation
+  setTimeout(() => {
+    const success = false;
+    if (success) {
+      resolve("Operation completed successfully!");
+    } else {
+      reject("Operation failed!");
+    }
+  }, 1000);
+});
+
+myPromise.then((result) => {
+  console.log(result); // This block won't be executed in this example
+}).catch((error) => {
+  console.error(error); // Outputs: Operation failed!
+});
+```
+
+3. **Promise.finally()**
+The finally method is used to specify a function that will be executed when the promise is either fulfilled or rejected.
+
+```javascript
+const myPromise = new Promise((resolve, reject) => {
+  // Simulating an asynchronous operation
+  setTimeout(() => {
+    const success = true;
+    if (success) {
+      resolve("Operation completed successfully!");
+    } else {
+      reject("Operation failed!");
+    }
+  }, 1000);
+});
+
+myPromise
+  .then((result) => {
+    console.log(result); // Outputs: Operation completed successfully!
+  })
+  .catch((error) => {
+    console.error(error); // This block won't be executed in this example
+  })
+  .finally(() => {
+    console.log("Finally block executed, regardless of success or failure.");
+  });
+```
+These methods provide a way to handle the various states of a promise: fulfilled (then), rejected (catch), and the final cleanup or additional logic (finally). Using these methods helps in writing more organized and readable asynchronous code.</div>
+
 4. What are some lifecycle methods in React JS?
 5. Explain the working of different hooks in React JS.
 6. What is reconciliation in React JS?
