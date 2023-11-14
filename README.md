@@ -182,6 +182,41 @@ function calculateTotalPrice(products){
 	console.log(totalPrice)
 }
 ```
+Ans:
+```javascript
+type Book = {
+  type: "book";
+  title: string;
+  price: number;
+};
+
+type Electronic = {
+  type: "electronic";
+  name: string;
+  price: number;
+};
+
+type Clothing = {
+  type: "clothing";
+  item: string;
+  price: number;
+};
+
+type Product = Book | Electronic | Clothing;
+
+const products: Product[] = [
+  { type: "book", title: "The Great Gatsby", price: 10 },
+  { type: "electronic", name: "Smartphone", price: 500 },
+  { type: "clothing", item: "T-shirt", price: 20 },
+];
+
+function calculateTotalPrice(products: Product[]): number {
+  const totalPrice: number = products.reduce((total, product) => total + product.price, 0);
+  console.log(totalPrice);
+  return totalPrice;
+}
+
+```
 ### Backend
 
 1. Write an API to update the price of a dish in a restaurant's menu. Make sure to do error handling.
