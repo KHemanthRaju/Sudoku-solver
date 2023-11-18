@@ -292,6 +292,71 @@ https://file.notion.so/f/f/8fefe6db-2092-435e-905d-5350a0474ea6/c65f1743-2090-40
     - For the `"WITHDRAW"` action, money is withdrawn from a bank account, and the balance is updated.
     - For the `"TRANSFER"` action, money is transferred between two bank accounts, updating the balances of both.
     - For the `"VIEW_TRANSACTIONS"` action, the transaction history of a bank account is retrieved.
+  
+<div>Ans: 
+```javascript
+	import bankAccountReducer from './bankAccountReducer';
+
+describe('bankAccountReducer', () => {
+  it('handles DEPOSIT action correctly', () => {
+    const initialState = { accounts: { 'acc1': { balance: 100, transactions: [] } } };
+    const action = { type: 'DEPOSIT', accountID: 'acc1', amount: 50 };
+
+    const newState = bankAccountReducer(initialState, action);
+
+    expect(newState.accounts['acc1'].balance).toEqual(150);
+    expect(newState.accounts['acc1'].transactions.length).toEqual(1);
+    expect(newState.accounts['acc1'].transactions[0].type).toEqual('DEPOSIT');
+    expect(newState.accounts['acc1'].transactions[0].amount).toEqual(50);
+  });
+
+  it('handles WITHDRAW action correctly', () => {
+    const initialState = { accounts: { 'acc1': { balance: 100, transactions: [] } } };
+    const action = { type: 'WITHDRAW', accountID: 'acc1', amount: 30 };
+
+    const newState = bankAccountReducer(initialState, action);
+
+    expect(newState.accounts['acc1'].balance).toEqual(70);
+    expect(newState.accounts['acc1'].transactions.length).toEqual(1);
+    expect(newState.accounts['acc1'].transactions[0].type).toEqual('WITHDRAW');
+    expect(newState.accounts['acc1'].transactions[0].amount).toEqual(30);
+  });
+
+  it('handles TRANSFER action correctly', () => {
+    const initialState = {
+      accounts: {
+        'acc1': { balance: 100, transactions: [] },
+        'acc2': { balance: 50, transactions: [] },
+      },
+    };
+    const action = { type: 'TRANSFER', fromAccountID: 'acc1', toAccountID: 'acc2', amount: 20 };
+
+    const newState = bankAccountReducer(initialState, action);
+
+    expect(newState.accounts['acc1'].balance).toEqual(80);
+    expect(newState.accounts['acc2'].balance).toEqual(70);
+    expect(newState.accounts['acc1'].transactions.length).toEqual(1);
+    expect(newState.accounts['acc1'].transactions[0].type).toEqual('TRANSFER');
+    expect(newState.accounts['acc1'].transactions[0].amount).toEqual(-20);
+    expect(newState.accounts['acc2'].transactions.length).toEqual(1);
+    expect(newState.accounts['acc2'].transactions[0].type).toEqual('TRANSFER');
+    expect(newState.accounts['acc2'].transactions[0].amount).toEqual(20);
+  });
+
+  it('handles VIEW_TRANSACTIONS action correctly', () => {
+    const initialState = { accounts: { 'acc1': { balance: 100, transactions: [{ type: 'DEPOSIT', amount: 50 }] } } };
+    const action = { type: 'VIEW_TRANSACTIONS', accountID: 'acc1' };
+
+    const newState = bankAccountReducer(initialState, action);
+
+    expect(newState.viewingTransactions).toEqual(true);
+    expect(newState.transactionsToShow.length).toEqual(1);
+    expect(newState.transactionsToShow[0].type).toEqual('DEPOSIT');
+    expect(newState.transactionsToShow[0].amount).toEqual(50);
+  });
+});
+```
+</div>
 2. Description: Write test cases for the `flightReservationReducer`.
     - `flightReservationReducer` manages a state representing flight reservations with passenger information, flight details, and payment status.
     - - It handles five types of actions: `"BOOK_FLIGHT"`, `"CANCEL_RESERVATION"`, `"UPDATE_PASSENGER_INFO"`, `"UPDATE_PAYMENT_STATUS"`, and `"SEARCH_FLIGHTS"`.
