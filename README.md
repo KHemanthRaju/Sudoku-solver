@@ -444,6 +444,45 @@ describe('flightReservationReducer', () => {
     const array2 = [5, 7, 9, 10, 12];
     const commonNumber = findCommonNumber(array1, array2);
     ```
+
+<div>Ans :
+```javascript
+function findCommonNumber(arr1, arr2) {
+  return arr1.find(item => arr2.includes(item));
+}
+
+// Test Case 1: Common number exists
+const array1Case1 = [2, 4, 6, 9, 11];
+const array2Case1 = [5, 7, 9, 10, 12];
+const commonNumberCase1 = findCommonNumber(array1Case1, array2Case1);
+console.assert(commonNumberCase1 === 9, 'Test Case 1 failed');
+
+// Test Case 2: No common number
+const array1Case2 = [1, 3, 5];
+const array2Case2 = [2, 4, 6];
+const commonNumberCase2 = findCommonNumber(array1Case2, array2Case2);
+console.assert(commonNumberCase2 === undefined, 'Test Case 2 failed');
+
+// Test Case 3: Empty array
+const array1Case3 = [];
+const array2Case3 = [5, 7, 9, 10, 12];
+const commonNumberCase3 = findCommonNumber(array1Case3, array2Case3);
+console.assert(commonNumberCase3 === undefined, 'Test Case 3 failed');
+
+// Test Case 4: Common number at the beginning
+const array1Case4 = [2, 4, 6, 9, 11];
+const array2Case4 = [2, 7, 9, 10, 12];
+const commonNumberCase4 = findCommonNumber(array1Case4, array2Case4);
+console.assert(commonNumberCase4 === 2, 'Test Case 4 failed');
+
+// Test Case 5: Common number at the end
+const array1Case5 = [2, 4, 6, 9, 11];
+const array2Case5 = [5, 7, 9, 10, 11];
+const commonNumberCase5 = findCommonNumber(array1Case5, array2Case5);
+console.assert(commonNumberCase5 === 11, 'Test Case 5 failed');
+	
+```
+</div>
     
 
 ### Concept Questions:
