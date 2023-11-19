@@ -221,6 +221,43 @@ function calculateTotalPrice(products: Product[]): number {
 
 1. Write an API to update the price of a dish in a restaurant's menu. Make sure to do error handling.
 2. Create an API to get the list of restaurants in descending order of their ratings. Make sure to do error handling.
+
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// Example restaurant data
+let restaurantList = [
+  { id: 1, name: 'Restaurant A', rating: 4.5 },
+  { id: 2, name: 'Restaurant B', rating: 3.8 },
+  { id: 3, name: 'Restaurant C', rating: 4.2 },
+  // Add more restaurants as needed
+];
+
+app.use(bodyParser.json());
+
+// Endpoint to get the list of restaurants in descending order of ratings
+app.get('/restaurants', (req, res) => {
+  // Check if the restaurantList is empty
+  if (restaurantList.length === 0) {
+    return res.status(404).json({ error: 'No restaurants found' });
+  }
+
+  // Sort the restaurantList in descending order of ratings
+  const sortedRestaurants = restaurantList.sort((a, b) => b.rating - a.rating);
+
+  return res.json(sortedRestaurants);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+```
+
 3. Create an API to get the list of restaurants in ascending order of their delivery time duration. Make sure to do error handling.
 4. Create an API to get the details of restaurant which has maximum number of menu items. If there are two or more restaurants, then return all those restaurants.
 5. Given a data for TV sets write an api to fetch TVs by price.
@@ -293,9 +330,10 @@ https://file.notion.so/f/f/8fefe6db-2092-435e-905d-5350a0474ea6/c65f1743-2090-40
     - For the `"TRANSFER"` action, money is transferred between two bank accounts, updating the balances of both.
     - For the `"VIEW_TRANSACTIONS"` action, the transaction history of a bank account is retrieved.
   
-<div>Ans: 
-```javascript
-	import bankAccountReducer from './bankAccountReducer';
+<div>Ans: </div>
+
+```jsx
+import bankAccountReducer from './bankAccountReducer';
 
 describe('bankAccountReducer', () => {
   it('handles DEPOSIT action correctly', () => {
@@ -356,7 +394,7 @@ describe('bankAccountReducer', () => {
   });
 });
 ```
-</div>
+
 2. Description: Write test cases for the `flightReservationReducer`.
     - `flightReservationReducer` manages a state representing flight reservations with passenger information, flight details, and payment status.
     - - It handles five types of actions: `"BOOK_FLIGHT"`, `"CANCEL_RESERVATION"`, `"UPDATE_PASSENGER_INFO"`, `"UPDATE_PAYMENT_STATUS"`, and `"SEARCH_FLIGHTS"`.
@@ -366,8 +404,9 @@ describe('bankAccountReducer', () => {
 - For the `"UPDATE_PAYMENT_STATUS"` action, the payment status for a reservation is updated.
 - For the `"SEARCH_FLIGHTS"` action, available flights meeting specific criteria are retrieved.
 
-<div>Ans:
-```javascript
+<div>Ans : </div>
+
+```jsx
 import flightReservationReducer from './flightReservationReducer';
 
 describe('flightReservationReducer', () => {
@@ -430,9 +469,8 @@ describe('flightReservationReducer', () => {
     expect(newState.availableFlights[0].destination).toEqual('Paris');
   });
 });
-
 ```
-</div>
+
 3. Given a function, write test cases for the function **`findCommonNumber`**.
     
     ```jsx
@@ -444,9 +482,9 @@ describe('flightReservationReducer', () => {
     const array2 = [5, 7, 9, 10, 12];
     const commonNumber = findCommonNumber(array1, array2);
     ```
+<div>Ans:</div>
 
-<div>Ans :
-```javascript
+```jsx
 function findCommonNumber(arr1, arr2) {
   return arr1.find(item => arr2.includes(item));
 }
@@ -480,10 +518,7 @@ const array1Case5 = [2, 4, 6, 9, 11];
 const array2Case5 = [5, 7, 9, 10, 11];
 const commonNumberCase5 = findCommonNumber(array1Case5, array2Case5);
 console.assert(commonNumberCase5 === 11, 'Test Case 5 failed');
-	
-```
-</div>
-    
+``` 
 
 ### Concept Questions:
 
@@ -512,8 +547,7 @@ const myClosure = outerFunction(); // myClosure now holds the innerFunction
 // Execute the inner function (which still has access to outerVar)
 myClosure(); // Outputs: "I'm from the outer function"
 ```
-
-<div>
+	
 In this example:
 
 * outerFunction contains a variable outerVar and an inner function innerFunction.
