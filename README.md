@@ -259,6 +259,43 @@ app.listen(port, () => {
 ```
 
 3. Create an API to get the list of restaurants in ascending order of their delivery time duration. Make sure to do error handling.
+
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// Example restaurant data
+let restaurantList = [
+  { id: 1, name: 'Restaurant A', deliveryTime: 30 },
+  { id: 2, name: 'Restaurant B', deliveryTime: 25 },
+  { id: 3, name: 'Restaurant C', deliveryTime: 40 },
+  // Add more restaurants as needed
+];
+
+app.use(bodyParser.json());
+
+// Endpoint to get the list of restaurants in ascending order of delivery time duration
+app.get('/restaurants', (req, res) => {
+  // Check if the restaurantList is empty
+  if (restaurantList.length === 0) {
+    return res.status(404).json({ error: 'No restaurants found' });
+  }
+
+  // Sort the restaurantList in ascending order of delivery time
+  const sortedRestaurants = restaurantList.sort((a, b) => a.deliveryTime - b.deliveryTime);
+
+  return res.json(sortedRestaurants);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+```
+
 4. Create an API to get the details of restaurant which has maximum number of menu items. If there are two or more restaurants, then return all those restaurants.
 5. Given a data for TV sets write an api to fetch TVs by price.
 
