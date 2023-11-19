@@ -297,6 +297,62 @@ app.listen(port, () => {
 ```
 
 4. Create an API to get the details of restaurant which has maximum number of menu items. If there are two or more restaurants, then return all those restaurants.
+
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// Example data
+let restaurantData = [
+  {
+    id: 1,
+    name: 'Restaurant A',
+    menuItems: [
+      { id: 101, name: 'Dish 1', price: 10 },
+      { id: 102, name: 'Dish 2', price: 15 },
+      // Add more menu items as needed
+    ],
+  },
+  {
+    id: 2,
+    name: 'Restaurant B',
+    menuItems: [
+      { id: 201, name: 'Dish 3', price: 12 },
+      { id: 202, name: 'Dish 4', price: 18 },
+      { id: 203, name: 'Dish 5', price: 20 },
+      // Add more menu items as needed
+    ],
+  },
+  // Add more restaurants as needed
+];
+
+// Endpoint to get details of the restaurant(s) with the maximum number of menu items
+app.get('/max-menu-items', (req, res) => {
+  // Check if the restaurantData is empty
+  if (restaurantData.length === 0) {
+    return res.status(404).json({ error: 'No restaurants found' });
+  }
+
+  // Find the maximum number of menu items
+  const maxMenuItems = Math.max(...restaurantData.map(restaurant => restaurant.menuItems.length));
+
+  // Filter restaurants with the maximum number of menu items
+  const restaurantsWithMaxMenuItems = restaurantData.filter(
+    restaurant => restaurant.menuItems.length === maxMenuItems
+  );
+
+  return res.json(restaurantsWithMaxMenuItems);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+```
+
 5. Given a data for TV sets write an api to fetch TVs by price.
 
 ```javascript
