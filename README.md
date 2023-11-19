@@ -365,6 +365,74 @@ describe('bankAccountReducer', () => {
 - For the `"UPDATE_PASSENGER_INFO"` action, passenger information for a reservation is updated.
 - For the `"UPDATE_PAYMENT_STATUS"` action, the payment status for a reservation is updated.
 - For the `"SEARCH_FLIGHTS"` action, available flights meeting specific criteria are retrieved.
+
+<div>Ans:
+```javascript
+import flightReservationReducer from './flightReservationReducer';
+
+describe('flightReservationReducer', () => {
+  it('handles BOOK_FLIGHT action correctly', () => {
+    const initialState = { reservations: [] };
+    const action = {
+      type: 'BOOK_FLIGHT',
+      passengerInfo: { name: 'John Doe', seatNumber: 'A1' },
+      flightDetails: { flightNumber: 'F123', destination: 'New York' },
+    };
+
+    const newState = flightReservationReducer(initialState, action);
+
+    expect(newState.reservations.length).toEqual(1);
+    expect(newState.reservations[0].passengerInfo.name).toEqual('John Doe');
+    expect(newState.reservations[0].flightDetails.flightNumber).toEqual('F123');
+    expect(newState.reservations[0].paymentStatus).toEqual('Pending');
+  });
+
+  it('handles CANCEL_RESERVATION action correctly', () => {
+    const initialState = {
+      reservations: [{ id: 1, passengerInfo: { name: 'Jane Doe' }, flightDetails: { flightNumber: 'F456' }, paymentStatus: 'Paid' }],
+    };
+    const action = { type: 'CANCEL_RESERVATION', reservationID: 1 };
+
+    const newState = flightReservationReducer(initialState, action);
+
+    expect(newState.reservations.length).toEqual(0);
+  });
+
+  it('handles UPDATE_PASSENGER_INFO action correctly', () => {
+    const initialState = {
+      reservations: [{ id: 1, passengerInfo: { name: 'Jane Doe' }, flightDetails: { flightNumber: 'F456' }, paymentStatus: 'Pending' }],
+    };
+    const action = { type: 'UPDATE_PASSENGER_INFO', reservationID: 1, updatedInfo: { name: 'Updated Name' } };
+
+    const newState = flightReservationReducer(initialState, action);
+
+    expect(newState.reservations[0].passengerInfo.name).toEqual('Updated Name');
+  });
+
+  it('handles UPDATE_PAYMENT_STATUS action correctly', () => {
+    const initialState = {
+      reservations: [{ id: 1, passengerInfo: { name: 'Jane Doe' }, flightDetails: { flightNumber: 'F456' }, paymentStatus: 'Pending' }],
+    };
+    const action = { type: 'UPDATE_PAYMENT_STATUS', reservationID: 1, newStatus: 'Paid' };
+
+    const newState = flightReservationReducer(initialState, action);
+
+    expect(newState.reservations[0].paymentStatus).toEqual('Paid');
+  });
+
+  it('handles SEARCH_FLIGHTS action correctly', () => {
+    const initialState = { availableFlights: [] };
+    const action = { type: 'SEARCH_FLIGHTS', criteria: { destination: 'Paris' } };
+
+    const newState = flightReservationReducer(initialState, action);
+
+    expect(newState.availableFlights.length).toEqual(1);
+    expect(newState.availableFlights[0].destination).toEqual('Paris');
+  });
+});
+
+```
+</div>
 3. Given a function, write test cases for the function **`findCommonNumber`**.
     
     ```jsx
