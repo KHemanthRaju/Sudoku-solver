@@ -410,7 +410,95 @@ app.listen(port, () => {
   }
 ];
  ```
-Given a screenshot, write the data model for the given Filpkart washing machine page.
+
+<div>Ans : </div>
+
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// Example TV set data
+const tvSets = [
+  {
+    id: '1',
+    brand: 'Samsung',
+    model: 'SUHD-1234',
+    screenSize: 55,
+    displayType: 'QLED',
+    resolution: '4K',
+    smartTV: true,
+    price: 999,
+    color: 'Black',
+    weight: 25,
+    dimensions: {
+      width: 48,
+      height: 30,
+      depth: 5,
+    },
+  },
+  {
+    id: '2',
+    brand: 'LG',
+    model: 'OLED-A1',
+    screenSize: 65,
+    displayType: 'OLED',
+    resolution: '4K',
+    smartTV: true,
+    price: 1499,
+    color: 'Silver',
+    weight: 30,
+    dimensions: {
+      width: 57,
+      height: 34,
+      depth: 4,
+    },
+  },
+  {
+    id: '3',
+    brand: 'Sony',
+    model: 'Bravia-X90J',
+    screenSize: 75,
+    displayType: 'LED',
+    resolution: '8K',
+    smartTV: true,
+    price: 2999,
+    color: 'Black',
+    weight: 40,
+    dimensions: {
+      width: 66,
+      height: 40,
+      depth: 6,
+    },
+  },
+];
+
+app.use(bodyParser.json());
+
+// Endpoint to fetch TV sets by price range
+app.post('/tv-by-price', (req, res) => {
+  const { minPrice, maxPrice } = req.body;
+
+  // Validate input
+  if (!minPrice || !maxPrice || isNaN(minPrice) || isNaN(maxPrice)) {
+    return res.status(400).json({ error: 'Invalid input. Please provide valid price range.' });
+  }
+
+  // Filter TV sets within the specified price range
+  const filteredTvSets = tvSets.filter((tvSet) => tvSet.price >= minPrice && tvSet.price <= maxPrice);
+
+  return res.json(filteredTvSets);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+```
+
+6. Given a screenshot, write the data model for the given Filpkart washing machine page.
 https://file.notion.so/f/f/8fefe6db-2092-435e-905d-5350a0474ea6/c65f1743-2090-407c-8308-8362c41bf74c/Screenshot_2023-11-06_at_8.14.02_PM.png?id=59f849bd-c548-45a1-9a98-1cf9aaff6369&table=block&spaceId=8fefe6db-2092-435e-905d-5350a0474ea6&expirationTimestamp=1699927200000&signature=54Wh-r2VjAKgHOQbauhIeQuedH-LRJOeXg_HnrLWisY&downloadName=Screenshot+2023-11-06+at+8.14.02+PM.png
 
 ### Testing
